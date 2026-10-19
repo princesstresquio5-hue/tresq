@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home | Our Store</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+            background:
+                linear-gradient(
+                    rgba(0, 10, 30, 0.70),
+                    rgba(0, 15, 35, 0.80)
+                ),
+                url("up.jpg") center / cover no-repeat fixed;
+        }
+
+        /* HOMEPAGE */
+        .home {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px 130px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1000px;
+            padding: 45px;
+
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 28px;
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+
+            animation: appear 0.8s ease;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 15px 10px 35px;
+        }
+
+        .tagline {
+            display: inline-block;
+            color: #00d9ff;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 6vw, 58px);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: #00d9ff;
+            text-shadow: 0 0 25px rgba(0, 217, 255, 0.25);
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto;
+            color: #e1edf5;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        /* SECTION HEADING */
+        .section-heading {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 span {
+            color: #00d9ff;
+        }
+
+        .section-heading p {
+            color: #d7e5ef;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* PRODUCT GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            padding: 28px 25px;
+            text-align: center;
+
+            background: rgba(0, 15, 35, 0.45);
+            border: 1px solid rgba(0, 217, 255, 0.25);
+            border-radius: 20px;
+
+            transition: 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-7px);
+            border-color: #00d9ff;
+            background: rgba(0, 217, 255, 0.10);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.12);
+        }
+
+        .product-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            color: #00d9ff;
+            font-size: 23px;
+            margin-bottom: 13px;
+        }
+
+        .product p {
+            color: #e0eaf2;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* WHY CHOOSE US */
+        .why-us {
+            margin-top: 30px;
+            padding: 30px;
+            text-align: center;
+
+            background: rgba(0, 15, 35, 0.40);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+        }
+
+        .why-us h2 {
+            color: #00d9ff;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .why-us p {
+            color: #e0eaf2;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .feature {
+            padding: 11px 16px;
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            border-radius: 30px;
+            color: #eafaff;
+            font-size: 13px;
+            background: rgba(0, 217, 255, 0.08);
+        }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: calc(100% - 30px);
+            max-width: 900px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            padding: 12px;
+
+            background: rgba(0, 5, 20, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .bottom-nav a:hover,
+        .bottom-nav a.active {
+            background: #00d9ff;
+            color: #00111c;
+        }
+
+        .bottom-nav a:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 3px;
+        }
+
+        /* ANIMATION */
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 600px) {
+            .home {
+                padding: 35px 15px 150px;
+            }
+
+            .content {
+                padding: 28px 18px;
+                border-radius: 22px;
+            }
+
+            .hero {
+                padding: 10px 0 25px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section-heading h2 {
+                font-size: 25px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .product {
+                padding: 25px 20px;
+            }
+
+            .product h3 {
+                font-size: 21px;
+            }
+
+            .why-us {
+                padding: 23px 18px;
+            }
+
+            .bottom-nav {
+                bottom: 8px;
+                width: calc(100% - 16px);
+                padding: 8px 4px;
+                gap: 3px;
+            }
+
+            .bottom-nav a {
+                padding: 10px 7px;
+                font-size: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="home">
+        <div class="content">
+
+            <!-- WELCOME SECTION -->
+            <section class="hero">
+                <span class="tagline">WELCOME TO OUR STORE</span>
+
+                <h1>
+                    Discover Your <span>Style</span>
+                </h1>
+
+                <p>
+                    Welcome to our store! Discover a collection of
+                    stylish accessories and everyday essentials
+                    designed to complement your personal style.
+                    Explore our products and find inspiration for
+                    your next favorite look.
+                </p>
+            </section>
+
+            <!-- PRODUCTS SECTION -->
+            <section>
+                <div class="section-heading">
+                    <h2>Explore Our <span>Products</span></h2>
+
+                    <p>
+                        Find the perfect accessories for your
+                        everyday style.
+                    </p>
+                </div>
+
+                <div class="product-grid">
+
+                    <article class="product">
+                        <div class="product-icon" aria-hidden="true">
+                            
+                        </div>
+
+                        <h3>Caps</h3>
+
+                        <p>
+                            Complete your outfit with stylish and
+                            comfortable caps. Perfect for casual
+                            outings and adding a sporty touch
+                            to your everyday look.
+                        </p>
+                    </article>
+
+                    <article class="product">
+                        <div class="product-icon" aria-hidden="true">
+                            
+                        </div>
+
+                        <h3>Jackets</h3>
+
+                        <p>
+                            Discover jackets that combine comfort
+                            and style. A great choice for cooler
+                            days, casual occasions, and fashionable
+                            everyday outfits.
+                        </p>
+                    </article>
+
+                    <article class="product">
+                        <div class="product-icon" aria-hidden="true">
+                            
+                        </div>
+
+                        <h3>Watches</h3>
+
+                        <p>
+                            Add a timeless finishing touch to your
+                            outfit with watches that balance
+                            functionality and modern design.
+                        </p>
+                    </article>
+
+                    <article class="product">
+                        <div class="product-icon" aria-hidden="true">
+                            
+                        </div>
+
+                        <h3>Perfumes</h3>
+
+                        <p>
+                            Explore fragrances that complement
+                            your personality. Find a scent that
+                            helps you feel fresh and confident
+                            throughout the day.
+                        </p>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- WHY CHOOSE US -->
+            <section class="why-us">
+                <h2>Why Choose Our Store?</h2>
+
+                <p>
+                    We aim to make discovering your favorite
+                    products simple and enjoyable. Our collection
+                    focuses on style, comfort, and versatility
+                    to help you express your individuality.
+                </p>
+
+                <div class="features">
+                    <span class="feature"> Stylish Designs</span>
+                    <span class="feature">Quality Focus</span>
+                    <span class="feature">Customer Friendly</span>
+                    <span class="feature">Everyday Essentials</span>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- NAVIGATION -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="homepage.html"
+           class="active"
+           aria-current="page">HOMEPAGE</a>
+
+        <a href="about.html">ABOUT</a>
+        <a href="product.html">PRODUCT</a>
+        <a href="contact.html">CONTACT</a>
+        <a href="index.html">LOGOUT</a>
+    </nav>
+
+</body>
+</html>

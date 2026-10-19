@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Izzie Small Business</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 30px;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.75)
+                ),
+                url("up.jpg") center / cover fixed no-repeat;
+            color: white;
+        }
+
+        /* HOMEPAGE */
+        .home {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px 120px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 800px;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(0, 217, 255, 0.45);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 0 35px rgba(0, 217, 255, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.25);
+        }
+
+        .content h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: #00d9ff;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #f0faff;
+        }
+
+        .welcome-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 14px 28px;
+            background: #00d9ff;
+            color: #00131a;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .welcome-btn:hover {
+            background: white;
+            box-shadow: 0 0 20px #00d9ff;
+            transform: scale(1.05);
+        }
+
+        /* ABOUT AND CONTACT SECTIONS */
+        .section {
+            min-height: 80vh;
+            padding: 80px 20px 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-content {
+            width: 100%;
+            max-width: 850px;
+            padding: 45px;
+            background: rgba(0, 0, 0, 0.68);
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .section-content:hover {
+            border-color: #00d9ff;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.15);
+        }
+
+        .section h2 {
+            font-size: clamp(28px, 4vw, 38px);
+            margin-bottom: 30px;
+            color: #00d9ff;
+            text-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .section p {
+            font-size: 17px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: #eeeeee;
+        }
+
+        /* CONTACT INFORMATION */
+        .contact-info {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            text-align: left;
+        }
+
+        .contact-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 15px;
+            overflow-wrap: anywhere;
+            transition: 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 217, 255, 0.10);
+            border-color: #00d9ff;
+            transform: translateY(-3px);
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #00d9ff;
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: #00d9ff;
+            text-decoration: underline;
+        }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.90);
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .bottom-nav a:hover,
+        .bottom-nav a:focus-visible {
+            background: #00d9ff;
+            color: #00131a;
+            outline: none;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 600px) {
+            body {
+                background-attachment: scroll;
+            }
+
+            .home {
+                padding: 30px 15px 120px;
+            }
+
+            .content {
+                padding: 40px 22px;
+            }
+
+            .content p {
+                font-size: 15px;
+            }
+
+            .section {
+                min-height: auto;
+                padding: 55px 15px 100px;
+            }
+
+            .section-content {
+                padding: 30px 20px;
+            }
+
+            .section p {
+                font-size: 15px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                padding: 16px;
+            }
+
+            .bottom-nav {
+                bottom: 8px;
+                width: 96%;
+                padding: 8px 5px;
+                gap: 3px;
+                border-radius: 15px;
+            }
+
+            .bottom-nav a {
+                padding: 10px 7px;
+                font-size: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HOMEPAGE -->
+    <section class="home" id="home">
+        <div class="content">
+            <h1>Welcome to Izzie's Business</h1>
+
+            <p>Quality, care, and service you can trust.</p>
+
+            <p>
+                Welcome to our small business!
+                We are happy to have you here.
+                Explore our website to discover more about
+                our business, products, and services.
+            </p>
+
+            <a href="#about" class="welcome-btn">
+                Learn More About Us
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section class="section" id="about">
+        <div class="section-content">
+            <h2>About Us</h2>
+
+            <p>
+                Welcome to <strong>Izzie's Small Business</strong>!
+                We are dedicated to providing quality products
+                and services to our valued customers.
+            </p>
+
+            <p>
+                Our goal is to give every customer a positive
+                experience through excellent service, quality,
+                and customer satisfaction.
+            </p>
+
+            <p>
+                We believe that every customer matters.
+                Your trust and support inspire us to continue
+                improving and serving you better.
+            </p>
+
+            <p>
+                Thank you for visiting our website and
+                supporting our small business!
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT US -->
+    <section class="section" id="contact">
+        <div class="section-content">
+            <h2>Contact Us</h2>
+
+            <p>
+                Have questions about our products or services?
+                We would love to hear from you!
+            </p>
+
+            <div class="contact-info">
+
+                <div class="contact-item">
+                    <strong>Business Name</strong>
+                    Izzie
+                </div>
+
+                <div class="contact-item">
+                    <strong>Email Address</strong>
+                    <a href="mailto:izziesmallbusiness@email.com">
+                        izziesmallbusiness@email.com
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Phone Number</strong>
+                    <a href="tel:09132456789">
+                        09132456789
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Business Address</strong>
+                    Aurora, Zamboanga del Sur
+                </div>
+
+                <div class="contact-item">
+                    <strong>Business Hours</strong>
+                    Monday - Saturday<br>
+                    8:00 AM - 9:00 PM
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="#home">HOMEPAGE</a>
+        <a href="#about">ABOUT US</a>
+        <a href="product.html">PRODUCT</a>
+        <a href="#contact">CONTACT</a>
+        <a href="index.html" class="logout">LOGOUT</a>
+    </nav>
+
+</body>
+</html>

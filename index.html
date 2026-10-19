@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log In | Izzie's Small Business</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 15px;
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.75)
+                ),
+                url("up.jpg") center / cover no-repeat fixed;
+        }
+
+        /* LOGIN CARD */
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 35px;
+
+            background: rgba(0, 0, 0, 0.50);
+            border: 1px solid rgba(0, 217, 255, 0.45);
+            border-radius: 25px;
+
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 0 25px rgba(0, 217, 255, 0.12),
+                0 15px 45px rgba(0, 0, 0, 0.45);
+
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .login-container:hover {
+            border-color: #00d9ff;
+            box-shadow:
+                0 0 35px rgba(0, 217, 255, 0.20),
+                0 15px 45px rgba(0, 0, 0, 0.45);
+        }
+
+        /* LOGO */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            display: block;
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            object-position: center;
+
+            border: 2px solid rgba(0, 217, 255, 0.65);
+            border-radius: 50%;
+            padding: 8px;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            filter: drop-shadow(0 0 12px rgba(0, 217, 255, 0.25));
+        }
+
+        #logoError {
+            display: none;
+            text-align: center;
+            color: #ffaaaa;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* TITLE */
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #00d9ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(0, 217, 255, 0.35);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #dddddd;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* FORM */
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #e8faff;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 14px 15px;
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+
+            outline: none;
+            color: white;
+            font-size: 15px;
+
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        input:focus {
+            border-color: #00d9ff;
+            box-shadow: 0 0 12px rgba(0, 217, 255, 0.20);
+        }
+
+        .password-input {
+            padding-right: 75px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+
+            width: auto;
+            padding: 5px;
+            background: transparent;
+            color: #00d9ff;
+            border: none;
+            box-shadow: none;
+
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toggle-password:hover {
+            background: transparent;
+            color: white;
+            box-shadow: none;
+            transform: translateY(-50%);
+        }
+
+        /* LOGIN BUTTON */
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 5px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #00d9ff;
+            color: #00131a;
+
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.18);
+
+            transition: background 0.3s, box-shadow 0.3s,
+                        transform 0.3s;
+        }
+
+        .login-button:hover {
+            background: white;
+            box-shadow: 0 0 22px rgba(0, 217, 255, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .login-button:focus-visible,
+        .toggle-password:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 4px;
+        }
+
+        .login-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* STATUS MESSAGE */
+        #message {
+            min-height: 20px;
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #bbbbbb;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+
+        .footer-text span {
+            color: #00d9ff;
+        }
+
+        /* MOBILE */
+        @media (max-width: 450px) {
+            body {
+                background-attachment: scroll;
+            }
+
+            .login-container {
+                padding: 30px 22px;
+                border-radius: 20px;
+            }
+
+            .logo {
+                width: 125px;
+                height: 125px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <!-- LOGO -->
+        <div class="logo-container">
+            <img
+                src="logo.jpg"
+                alt="Izzie's Small Business Logo"
+                class="logo"
+                onerror="
+                    this.style.display = 'none';
+                    document.getElementById('logoError').style.display = 'block';
+                "
+            >
+
+            <p id="logoError">
+                Logo not found.<br>
+                Please check your logo.jpg file.
+            </p>
+        </div>
+
+        <!-- TITLE -->
+        <h1>Welcome</h1>
+
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+
+                <div class="input-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="password-input"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="togglePassword"
+                        aria-controls="password"
+                        aria-pressed="false"
+                    >
+                        SHOW
+                    </button>
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                LOG IN
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+        </form>
+
+       
+
+    </main>
+
+    <script>
+        // Demo credentials only.
+        // Client-side credentials are not secure for a real website.
+        const USERNAME = "admin";
+        const PASSWORD = "user";
+
+        const loginForm = document.getElementById("loginForm");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const message = document.getElementById("message");
+        const loginButton = document.getElementById("loginButton");
+        const togglePassword = document.getElementById("togglePassword");
+
+        // SHOW / HIDE PASSWORD
+        togglePassword.addEventListener("click", function () {
+            const isPasswordHidden = passwordInput.type === "password";
+
+            passwordInput.type = isPasswordHidden ? "text" : "password";
+            togglePassword.textContent = isPasswordHidden ? "HIDE" : "SHOW";
+            togglePassword.setAttribute("aria-pressed", String(isPasswordHidden));
+        });
+
+        // LOGIN VALIDATION
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            if (username === USERNAME && password === PASSWORD) {
+                message.style.color = "#90ff90";
+                message.textContent = "Login successful! Redirecting...";
+
+                loginButton.disabled = true;
+                loginButton.textContent = "PLEASE WAIT...";
+
+                setTimeout(function () {
+                    window.location.href = "homepage.html";
+                }, 1000);
+
+            } else {
+                message.style.color = "#ff8080";
+                message.textContent = "Invalid username or password.";
+
+                passwordInput.value = "";
+                passwordInput.focus();
+            }
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+            background:
+                linear-gradient(
+                    rgba(0, 10, 30, 0.65),
+                    rgba(0, 15, 35, 0.75)
+                ),
+                url("up.jpg") center / cover no-repeat fixed;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px 130px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 850px;
+            padding: 45px;
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 25px;
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+
+            animation: appear 0.8s ease;
+        }
+
+        .label {
+            display: inline-block;
+            color: #00d9ff;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 6vw, 55px);
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #00d9ff;
+        }
+
+        .intro {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #e4edf5;
+            margin-bottom: 30px;
+        }
+
+        /* INFORMATION CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 18px;
+            background: rgba(0, 15, 35, 0.45);
+            border: 1px solid rgba(0, 217, 255, 0.25);
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #00d9ff;
+            background: rgba(0, 217, 255, 0.10);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.12);
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .card h2 {
+            color: #00d9ff;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #e0eaf2;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* THANK YOU */
+        .thank-you {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .thank-you h2 {
+            color: #00d9ff;
+            margin-bottom: 12px;
+            font-size: 25px;
+        }
+
+        .thank-you p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #e4edf5;
+        }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: calc(100% - 30px);
+            max-width: 900px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+
+            padding: 12px;
+            background: rgba(0, 5, 20, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .bottom-nav a:hover,
+        .bottom-nav a.active {
+            background: #00d9ff;
+            color: #00111c;
+        }
+
+        /* ANIMATION */
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 600px) {
+            .about {
+                padding: 35px 15px 150px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .intro {
+                font-size: 15px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .card h2 {
+                font-size: 20px;
+            }
+
+            .bottom-nav {
+                bottom: 8px;
+                width: calc(100% - 16px);
+                padding: 8px 4px;
+                gap: 3px;
+            }
+
+            .bottom-nav a {
+                padding: 10px 7px;
+                font-size: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="about">
+        <section class="content">
+
+            <span class="label">GET TO KNOW US</span>
+
+            <h1>About <span>Us</span></h1>
+
+            <p class="intro">
+                Welcome to our website! This website was created
+                to share our interests, showcase our products,
+                and provide information about our activities.
+                We aim to make your experience simple, enjoyable,
+                and informative as you explore our pages.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="icon"></div>
+                    <h2>Our Mission</h2>
+                    <p>
+                        Our mission is to provide helpful information
+                        and create a user-friendly website where
+                        visitors can easily explore our content,
+                        discover our products, and learn more about us.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"></div>
+                    <h2>Our Vision</h2>
+                    <p>
+                        Our vision is to create a modern, creative,
+                        and accessible website that offers a smooth
+                        browsing experience on computers, tablets,
+                        and mobile devices.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"></div>
+                    <h2>What We Offer</h2>
+                    <p>
+                        Explore our product page, learn more about
+                        our website, contact us with your questions,
+                        and enjoy the films featured on our
+                        film viewing page.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon"></div>
+                    <h2>Our Values</h2>
+                    <p>
+                        We value creativity, simplicity, and
+                        accessibility. We continuously aim to improve
+                        our website so visitors can find information
+                        easily and enjoy exploring our content.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="thank-you">
+                <h2>Thank You for Visiting!</h2>
+                <p>
+                    Thank you for taking the time to visit our website.
+                    We hope you enjoy exploring our pages and learning
+                    more about what we have to offer.
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="homepage.html">HOMEPAGE</a>
+        <a href="about.html" class="active" aria-current="page">ABOUT</a>
+        <a href="product.html">PRODUCT</a>
+        <a href="contact.html">CONTACT</a>
+        <a href="index.html">LOGOUT</a>
+    </nav>
+
+</body>
+</html>
+

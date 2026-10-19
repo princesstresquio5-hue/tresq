@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Products</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    color: white;
+    padding-bottom: 120px;
+    background:
+        linear-gradient(rgba(0,10,30,.75), rgba(0,15,35,.82)),
+        url("up.jpg") center / cover fixed no-repeat;
+}
+
+.header {
+    text-align: center;
+    padding: 45px 20px 25px;
+}
+
+.header h1 {
+    font-size: clamp(35px, 6vw, 55px);
+    margin-bottom: 15px;
+}
+
+.header h1 span {
+    color: #00d9ff;
+}
+
+.header p {
+    color: #e0edf5;
+    line-height: 1.8;
+}
+
+.search {
+    display: block;
+    width: 90%;
+    max-width: 500px;
+    margin: 10px auto 30px;
+    padding: 15px 20px;
+    border: 1px solid #00d9ff;
+    border-radius: 15px;
+    background: rgba(255,255,255,.1);
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+.search::placeholder {
+    color: #ddd;
+}
+
+.products {
+    max-width: 1250px;
+    margin: auto;
+    padding: 10px 25px 30px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.product-card {
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 20px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    transition: .3s;
+}
+
+.product-card:hover {
+    transform: translateY(-7px);
+    border-color: #00d9ff;
+    box-shadow: 0 12px 30px rgba(0,217,255,.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+}
+
+.product-card h2 {
+    color: #00d9ff;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #e0eaf2;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+.price {
+    color: #00f0ff;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.buy-btn {
+    width: 100%;
+    max-width: 190px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #00d9ff;
+    color: #00111c;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.buy-btn:hover {
+    background: white;
+    transform: scale(1.03);
+}
+
+.message {
+    display: none;
+    max-width: 550px;
+    width: calc(100% - 30px);
+    margin: 0 auto 30px;
+    padding: 20px;
+    text-align: center;
+    line-height: 1.8;
+    background: rgba(0,217,255,.12);
+    border: 1px solid #00d9ff;
+    border-radius: 15px;
+}
+
+.close-btn {
+    margin-top: 12px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #00d9ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 25px;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 30px);
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 12px;
+    background: rgba(0,5,20,.90);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 18px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    z-index: 1000;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.bottom-nav a:hover,
+.bottom-nav a.active {
+    background: #00d9ff;
+    color: #00111c;
+}
+
+@media (max-width: 1000px) {
+    .products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+        padding: 10px 12px 25px;
+    }
+
+    .product-card img {
+        height: 145px;
+    }
+
+    .product-info {
+        padding: 15px 10px;
+    }
+
+    .product-card h2 {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 19px;
+    }
+
+    .buy-btn {
+        font-size: 12px;
+    }
+
+    .bottom-nav {
+        bottom: 8px;
+        width: calc(100% - 16px);
+        padding: 8px 4px;
+        gap: 3px;
+    }
+
+    .bottom-nav a {
+        padding: 10px 7px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .products {
+        grid-template-columns: 1fr;
+        padding: 10px 20px;
+    }
+
+    .product-card img {
+        height: 200px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>OUR <span>PRODUCTS</span></h1>
+    <p>Discover our collection of stylish accessories and everyday essentials!</p>
+</header>
+
+
+<main class="products" id="productGrid">
+
+    <article class="product-card" data-name="t-shirt">
+        <img src="y1.jpg" alt="T-Shirt">
+        <div class="product-info">
+            <h2>T-Shirt</h2>
+            <p class="description">Comfortable and stylish shirt for everyday wear.</p>
+            <p class="price">250.00</p>
+            <button class="buy-btn" data-name="T-Shirt" data-price="250">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="shoes">
+        <img src="y2.jpg" alt="Shoes">
+        <div class="product-info">
+            <h2>Shoes</h2>
+            <p class="description">Comfortable footwear for daily use.</p>
+            <p class="price">850.00</p>
+            <button class="buy-btn" data-name="Shoes" data-price="850">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="bag">
+        <img src="y3.jpg" alt="Bag">
+        <div class="product-info">
+            <h2>Bag</h2>
+            <p class="description">A useful bag for school, work, and travel.</p>
+            <p class="price">450.00</p>
+            <button class="buy-btn" data-name="Bag" data-price="450">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="watch">
+        <img src="y4.jpg" alt="Watch">
+        <div class="product-info">
+            <h2>Watch</h2>
+            <p class="description">A stylish accessory for any occasion.</p>
+            <p class="price">650.00</p>
+            <button class="buy-btn" data-name="Watch" data-price="650">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="headphones">
+        <img src="y5.jpg" alt="Headphones">
+        <div class="product-info">
+            <h2>Headphones</h2>
+            <p class="description">Enjoy your favorite music with clear sound.</p>
+            <p class="price">550.00</p>
+            <button class="buy-btn" data-name="Headphones" data-price="550">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="sunglasses">
+        <img src="y6.jpg" alt="Sunglasses">
+        <div class="product-info">
+            <h2>Sunglasses</h2>
+            <p class="description">Fashionable sunglasses for sunny days.</p>
+            <p class="price">300.00</p>
+            <button class="buy-btn" data-name="Sunglasses" data-price="300">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="perfume">
+        <img src="y7.jpg" alt="Perfume">
+        <div class="product-info">
+            <h2>Perfume</h2>
+            <p class="description">A pleasant fragrance for everyday occasions.</p>
+            <p class="price">400.00</p>
+            <button class="buy-btn" data-name="Perfume" data-price="400">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="wallet">
+        <img src="y8.jpg" alt="Wallet">
+        <div class="product-info">
+            <h2>Wallet</h2>
+            <p class="description">A practical wallet for cash and cards.</p>
+            <p class="price">200.00</p>
+            <button class="buy-btn" data-name="Wallet" data-price="200">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="cap">
+        <img src="y9.jpg" alt="Cap">
+        <div class="product-info">
+            <h2>Cap</h2>
+            <p class="description">A casual cap to complete your outfit.</p>
+            <p class="price">180.00</p>
+            <button class="buy-btn" data-name="Cap" data-price="180">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="jacket">
+        <img src="y10.jpg" alt="Jacket">
+        <div class="product-info">
+            <h2>Jacket</h2>
+            <p class="description">A comfortable jacket for cool weather.</p>
+            <p class="price">950.00</p>
+            <button class="buy-btn" data-name="Jacket" data-price="950">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="phone">
+        <img src="y11.jpg" alt="Phone">
+        <div class="product-info">
+            <h2>Phone</h2>
+            <p class="description">A mobile phone for everyday communication.</p>
+            <p class="price">9,900.00</p>
+            <button class="buy-btn" data-name="Phone" data-price="9900">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="vape">
+        <img src="y12.jpg" alt="Vape product">
+        <div class="product-info">
+            <h2>Vape</h2>
+            <p class="description">Product details subject to applicable age and legal restrictions.</p>
+            <p class="price">800.00</p>
+            <button class="buy-btn" data-name="Vape" data-price="800">View Details</button>
+        </div>
+    </article>
+    <article class="product-card" data-name="backpack">
+        <img src="y13.jpg" alt="Backpack">
+        <div class="product-info">
+            <h2>Backpack</h2>
+            <p class="description">A spacious backpack for school, work, and travel.</p>
+            <p class="price">600.00</p>
+            <button class="buy-btn" data-name="Backpack" data-price="600">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="keyboard">
+        <img src="y14.jpg" alt="Keyboard">
+        <div class="product-info">
+            <h2>Keyboard</h2>
+            <p class="description">A reliable keyboard for typing and everyday computer use.</p>
+            <p class="price">750.00</p>
+            <button class="buy-btn" data-name="Keyboard" data-price="750">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="mouse">
+        <img src="y15.jpg" alt="Computer Mouse">
+        <div class="product-info">
+            <h2>Computer Mouse</h2>
+            <p class="description">A comfortable mouse for work, study, and gaming.</p>
+            <p class="price">350.00</p>
+            <button class="buy-btn" data-name="Computer Mouse" data-price="350">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="speaker">
+        <img src="y16.jpg" alt="Speaker">
+        <div class="product-info">
+            <h2>Speaker</h2>
+            <p class="description">Enjoy music and entertainment with clear audio.</p>
+            <p class="price">1,200.00</p>
+            <button class="buy-btn" data-name="Speaker" data-price="1200">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="tablet">
+        <img src="y17.jpg" alt="Tablet">
+        <div class="product-info">
+            <h2>Tablet</h2>
+            <p class="description">A handy device for browsing, studying, and entertainment.</p>
+            <p class="price">5,500.00</p>
+            <button class="buy-btn" data-name="Tablet" data-price="5500">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="powerbank">
+        <img src="y18.jpg" alt="Power Bank">
+        <div class="product-info">
+            <h2>Power Bank</h2>
+            <p class="description">Keep your devices charged while you are on the go.</p>
+            <p class="price">500.00</p>
+            <button class="buy-btn" data-name="Power Bank" data-price="500">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="umbrella">
+        <img src="y19.jpg" alt="Umbrella">
+        <div class="product-info">
+            <h2>Umbrella</h2>
+            <p class="description">Stay protected from rain and the hot sunshine.</p>
+            <p class="price">250.00</p>
+            <button class="buy-btn" data-name="Umbrella" data-price="250">Buy Now</button>
+        </div>
+    </article>
+
+    <article class="product-card" data-name="slippers">
+        <img src="y20.jpg" alt="Slippers">
+        <div class="product-info">
+            <h2>Slippers</h2>
+            <p class="description">Lightweight and comfortable slippers for everyday use.</p>
+            <p class="price">150.00</p>
+            <button class="buy-btn" data-name="Slippers" data-price="150">Buy Now</button>
+        </div>
+    </article>
+
+<article class="product-card" data-name="laptop">
+    <img src="y21.jpg" alt="Laptop">
+
+    <div class="product-info">
+        <h2>Laptop</h2>
+        <p class="description">
+            A powerful and reliable laptop for school,
+            work, and entertainment.
+        </p>
+
+        <p class="price">18,500.00</p>
+
+        <button class="buy-btn"
+                data-name="Laptop"
+                data-price="18500">
+            Buy Now
+        </button>
+    </div>
+</article>
+
+</main>
+
+<p class="no-results" id="noResults">No products found. Try another search.</p>
+
+<section class="message" id="purchaseMessage" aria-live="polite">
+    <p id="messageText"></p>
+    <button class="close-btn" id="closeMessage">Close</button>
+</section>
+
+<nav class="bottom-nav" aria-label="Main navigation">
+    <a href="homepage.html">HOMEPAGE</a>
+    <a href="about.html">ABOUT</a>
+    <a href="product.html" class="active" aria-current="page">PRODUCT</a>
+    <a href="contact.html">CONTACT</a>
+    <a href="index.html">LOGOUT</a>
+</nav>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".product-card");
+const noResults = document.getElementById("noResults");
+const message = document.getElementById("purchaseMessage");
+const messageText = document.getElementById("messageText");
+
+searchInput.addEventListener("input", function () {
+    const term = this.value.toLowerCase().trim();
+    let count = 0;
+
+    cards.forEach(function (card) {
+        const matches = card.dataset.name.includes(term);
+        card.style.display = matches ? "flex" : "none";
+        if (matches) count++;
+    });
+
+    noResults.style.display = count === 0 ? "block" : "none";
+});
+
+document.querySelectorAll(".buy-btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+        const name = this.dataset.name;
+        const price = Number(this.dataset.price);
+        const formattedPrice = price.toLocaleString("en-PH", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        if (name === "Vape") {
+            messageText.textContent =
+                "Vape product: ?" + formattedPrice +
+                ". Applicable age and legal restrictions must be followed.";
+        } else {
+            messageText.textContent =
+                name + " — ?" + formattedPrice +
+                ". Thank you for your interest! This is a demo only; no order has been placed.";
+        }
+
+        message.style.display = "block";
+        message.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+});
+
+document.getElementById("closeMessage").addEventListener("click", function () {
+    message.style.display = "none";
+});
+</script>
+
+</body>
+</html>
+
+
